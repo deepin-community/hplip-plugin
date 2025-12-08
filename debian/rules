@@ -1,4 +1,72 @@
 #!/usr/bin/make -f
+# debian/rules for hplip
+##
+##  Build-tree preparation
+##
+
+PKGNAME=hplip-plugin
+PKGVER=3.24.4
+PKGSOURCE=https://developers.hp.com/sites/default/files/hplip-$(PKGVER)-plugin.run
 
 %:
 	dh $@
+
+ROOTDIR=$(CURDIR)
+DEBIAN_TMPDIR=$(ROOTDIR)/debian/$(PKGNAME)
+HPLIP_HOMEDIR=$(DEBIAN_TMPDIR)/usr/share/hplip
+
+BITNESS=$(DEB_HOST_ARCH_BITS)
+ARCH=
+ifeq ($(findstring arm,$(DEB_HOST_ARCH)), arm)
+	ARCH=arm
+endif
+ifeq ($(findstring ia64,$(DEB_HOST_ARCH)), ia64)
+	ARCH=x86_
+endif
+ifeq ($(findstring amd64,$(DEB_HOST_ARCH)), amd64)
+	ARCH=x86_
+endif
+ifeq ($(findstring i386,$(DEB_HOST_ARCH)), i386)
+	ARCH=x86_
+endif
+
+override_dh_install:
+	# install hplip.state
+	dh_install
+	# exec hplip-plugin-$(PKGVER).run
+	sh "hplip-$(PKGVER)-plugin.run" --target "$(ROOTDIR)/hplip-$(PKGVER)-plugin" --noexec
+	# Enter 
+	(cd "$(ROOTDIR)/hplip-$(PKGVER)-plugin/" ;\
+		install -d -m755 "$(HPLIP_HOMEDIR)/" ;\
+		install -m 644 plugin.spec "$(HPLIP_HOMEDIR)/" ;\
+		install -d -m755 "$(HPLIP_HOMEDIR)/prnt/plugins/" ;\
+		install -m 755 "lj-$(ARCH)$(BITNESS).so" "$(HPLIP_HOMEDIR)/prnt/plugins/lj-$(ARCH)$(BITNESS).so" ;\
+		install -m 755 "hbpl1-$(ARCH)$(BITNESS).so" "$(HPLIP_HOMEDIR)/prnt/plugins/hbpl1-$(ARCH)$(BITNESS).so" ;\
+		install -d -m755 "$(HPLIP_HOMEDIR)/data/firmware/" ;\
+		cp *.fw.gz "$(HPLIP_HOMEDIR)/data/firmware/";\
+		install -d -m755 "$(HPLIP_HOMEDIR)/data/plugins/" ;\
+		install -m 644 license.txt "$(HPLIP_HOMEDIR)/data/plugins/license.txt";\
+		install -d -m755 "$(HPLIP_HOMEDIR)/scan/plugins/";\
+		install -m 755 "bb_soap-$(ARCH)$(BITNESS).so" "$(HPLIP_HOMEDIR)/scan/plugins/bb_soap-$(ARCH)$(BITNESS).so";\
+		install -m 755 "bb_marvell-$(ARCH)$(BITNESS).so" "$(HPLIP_HOMEDIR)/scan/plugins/bb_marvell-$(ARCH)$(BITNESS).so" ;\
+		install -m 755 "bb_soapht-$(ARCH)$(BITNESS).so" "$(HPLIP_HOMEDIR)/scan/plugins/bb_soapht-$(ARCH)$(BITNESS).so";\
+		install -m 755 "bb_escl-$(ARCH)$(BITNESS).so" "$(HPLIP_HOMEDIR)/scan/plugins/bb_escl-$(ARCH)$(BITNESS).so";\
+		install -d -m755 "$(HPLIP_HOMEDIR)/fax/plugins/";\
+		install -m 755 "fax_marvell-$(ARCH)$(BITNESS).so" "$(HPLIP_HOMEDIR)/fax/plugins/fax_marvell-$(ARCH)$(BITNESS).so";\
+		cd $(CURDIR);\
+	)
+	# Create symlinks
+	(cd "$(HPLIP_HOMEDIR)/prnt/plugins/" ; \
+		ln -f -s "lj-$(ARCH)$(BITNESS).so" lj.so ;\
+		ln -f -s "hbpl1-$(ARCH)$(BITNESS).so" hbpl1.so;\
+		cd "$(HPLIP_HOMEDIR)/scan/plugins/";\
+		ln -f -s "bb_soap-$(ARCH)$(BITNESS).so" bb_soap.so;\
+		ln -f -s "bb_marvell-$(ARCH)$(BITNESS).so" bb_marvell.so;\
+		ln -f -s "bb_soapht-$(ARCH)$(BITNESS).so" bb_soapht.so;\
+		ln -f -s "bb_escl-$(ARCH)$(BITNESS).so" bb_escl.so;\
+		cd "$(HPLIP_HOMEDIR)/fax/plugins/";\
+		ln -f -s "fax_marvell-$(ARCH)$(BITNESS).so" fax_marvell.so;\
+		cd $(CURDIR);\
+	)
+get-orig-source:
+	wget "$(PKGSOURCE)" 
