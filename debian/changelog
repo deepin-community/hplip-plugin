@@ -1,5 +1,41 @@
-template-repository (1.0-1) unstable; urgency=medium
+hplip-plugin (3.24.4) unstable; urgency=medium
 
-  * Initial release
+  * Debuild from hplip-plugin-3.24.4.run.
 
- -- Tsic404 <liuheng@deepin.org>  Sat, 28 Jan 2023 13:46:49 +0800
+ -- lichenggang <lichenggang@deepin.org>  Mon, 08 Dec 2025 14:17:23 +0800
+
+hplip-plugin (3.21.8+klbkfocal) focal; urgency=medium
+
+  * Debuild from hplip-plugin-3.21.8.run.
+
+ -- Gökhan Gökkaya <wirelessanten@gmail.com>  Tue, 14 Sep 2021 01:04:04 +0300
+
+hplip-plugin (3.21.6+klbkfocal) focal; urgency=medium
+
+  * Debuild from hplip-plugin-3.21.6.run.
+
+ -- Gökhan Gökkaya <wirelessanten@gmail.com>  Sun, 05 Sep 2021 15:43:25 +0300
+
+hplip-plugin (3.21.4+klbkfocal) focal; urgency=medium
+
+  * Debuild from hplip-plugin-3.21.4.run.
+
+ -- Gökhan Gökkaya <wirelessanten@gmail.com>  Sun, 20 Jun 2021 01:24:09 +0300
+
+hplip-plugin (3.21.2+klbkfocal) focal; urgency=medium
+
+  * Debuild from hplip-plugin-3.21.2.run.
+
+ -- Gökhan Gökkaya <wirelessanten@gmail.com>  Mon, 22 Feb 2021 01:33:12 +0300
+
+hplip-plugin (3.20.11+lmtrfocal) focal; urgency=medium
+
+  * Debuild from hplip-plugin-3.20.11.run.
+
+ -- Gökhan Gökkaya <wirelessanten@gmail.com>  Sat, 05 Dec 2020 17:35:11 +0300
+
+hplip-plugin (3.20.9+lmtrfocal1) focal; urgency=low
+
+  * Debuild from hplip-plugin-3.20.9.run.
+
+ -- Gökhan Gökkaya <wirelessanten@gmail.com>  Sat, 31 Oct 2020 04:37:58 +0300
