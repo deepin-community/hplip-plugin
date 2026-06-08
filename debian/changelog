@@ -1,8 +1,8 @@
-hplip-plugin (3.24.4) unstable; urgency=medium
+hplip-plugin (3.26.4) unstable; urgency=medium
 
-  * Debuild from hplip-plugin-3.24.4.run.
+  * Debuild from hplip-plugin-3.26.4.run.
 
- -- lichenggang <lichenggang@deepin.org>  Mon, 08 Dec 2025 14:17:23 +0800
+ -- lichenggang <lichenggang@deepin.org>  Sun, 08 Jun 2026 14:17:23 +0800
 
 hplip-plugin (3.21.8+klbkfocal) focal; urgency=medium
 

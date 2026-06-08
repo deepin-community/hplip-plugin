@@ -8,5 +8,5 @@ Homepage: https://developers.hp.com/hp-linux-imaging-and-printing/plugins
 
 Package: hplip-plugin
 Architecture: any
-Depends: hplip (>= 3.24.4)
+Depends: hplip (>= 3.26.4)
 Description: HP Linux Printing and Imaging System (HPLIP) Plugin.

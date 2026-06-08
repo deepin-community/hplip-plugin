@@ -5,7 +5,7 @@
 ##
 
 PKGNAME=hplip-plugin
-PKGVER=3.24.4
+PKGVER=3.26.4
 PKGSOURCE=https://developers.hp.com/sites/default/files/hplip-$(PKGVER)-plugin.run
 
 %:
